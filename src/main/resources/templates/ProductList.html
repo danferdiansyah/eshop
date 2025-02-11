@@ -59,7 +59,13 @@
                     <td th:text="${product.productName}"></td>
                     <td th:text="${product.productQuantity}"></td>
                     <td>
-                        <form th:action="@{/product/delete/{productId}(productId=${product.productId})}" method="post">
+                        <!-- Edit Button -->
+                        <a th:href="@{/product/edit/{productId}(productId=${product.productId})}" class="btn btn-warning btn-sm me-2">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+
+                        <!-- Delete Button -->
+                        <form th:action="@{/product/delete/{productId}(productId=${product.productId})}" method="post" style="display: inline;">
                             <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="bi bi-trash"></i> Delete
                             </button>
