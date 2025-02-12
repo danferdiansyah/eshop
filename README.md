@@ -47,7 +47,6 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 
  # Reflection 2
 
- ---
 
  **1.** Setelah membuat unit test, saya merasa cukup secure karena dapat memastikan bahwa code yang telah saya buat dapat berjalan sebagaimana mestinya. Akan tetapi, ada bagian trickynya di mana saya perlu menulis code yang relatif repetitif dan terkadang terkesan membosankan. Atau mungkin memastikan edge case jika ke depannya saya perlu melakukan unit testing terhadap function yang lebih kompleks. Lalu
  **Berapa banyak unit test yang diperlukan dalam suatu class?** Unit test perlu dibuat sebisa mungkin dapat melakukan coverage seluruh bagian pada class. Misalnya, untuk semua logika bisnis atau method public. Lalu, unit test untuk skenario positif dan negatif. Serta, unit test untuk berbagai kemungkinan parameter.
