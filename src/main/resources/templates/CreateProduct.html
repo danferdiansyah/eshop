@@ -38,10 +38,11 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h2 class="card-title mb-0">Edit Product</h2>
+                    <h2 class="card-title mb-0">Create New Product</h2>
                 </div>
                 <div class="card-body">
                     <form th:action="@{/product/create}" th:object="${product}" method="post">
+                        <input type="hidden" th:field="*{productId}" />
 
                         <!-- Product Name Field -->
                         <div class="mb-3">
@@ -58,7 +59,7 @@
                         <!-- Submit Button -->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-save"></i> Create Product
+                                <i class="bi bi-save"></i> Update Product
                             </button>
                         </div>
                     </form>
