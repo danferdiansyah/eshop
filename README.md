@@ -55,3 +55,11 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 - **Bagaimana memastikan kalau unit testnya sudah cukup?** Ada code coverage yang bisa dijadikan sebagai acuan seberapa banyak code dapat dieksekusi sesuai ekspektasi. Usahakan untuk membuat unit test dengan code coverage yang tinggi. Namun demikian, tetap perlu review dari tim yang memiliki kapabilitas sebagai tester.
 
 - **Jika code coverage mencapai 100%, apakah program bebas bug?** Belum tentu. Karena unit test hanya akan berjalan seperti yang kita perintahkan. Unit test memastikan bahwa method yang kita buat memberi output sesuai dengan ekspektasi yang kita inginkan. Akan tetapi, tetap saja ada kemungkinan bug di luar method, misalnya bug yang terjadi akibat kesalahan integrasi antarkomponen code yang tidak terdteksi unit test.
+
+**2.** Penambahan functional test baru dengan code yang sebagian besar mirip `CreateProductFunctionalTest.java` bisa mengurangi kualitas code. Beberapa issue mengapa hal tersebut mempengaruhi kualitas code adalah sebagai berikut
+
+- **Code Duplication:** Jika setup procedure dan instance variable kebanyakan sama, hal ini dapat mengurangi efisiensi program. Program akan memakan lebih banyak memori untuk code yang persis.
+  
+- **Poor Maintainability:** Misal ada perubahan yang dilakukan di instance variable, maka kita perlu mengubah dua class: `CreateProductFunctionalTest.java` dan class baru yang telah dibuat.
+
+**Solusinya,** dapat direfactor dengan membuat base test case, misalnya `BaseFunctionalTest.java` yang berisi instance variable dan setup procedure. Lalu, `CreateProductFunctionalTest`.java dapat meng-*inherit* base test tersebut dengan ditambah method tambahan sesuai dengan testing yang akan dilakukan. Sama halnya untuk class baru, bisa langsung meng-*inherit* base test dan kemudian ditambah dengan method untuk menghitung banyaknya row/produk yang telah dibuat.
