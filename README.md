@@ -21,3 +21,25 @@ Anotasi seperti `@Controller`, `@Service`, `@Repository`, dan `@Autowired` digun
 
 - **Consistent Formatting:**
 Kode diformat secara konsisten, dengan indentasi dan spasi yang sesuai, sehingga code jadi lebih mudah dibaca.
+
+### Secure Coding Practices
+
+Selain clean code principle, saya juga perlu memperhatikan kemananan dari product yang saya buat guna mencegah serangan peretas dan data user tetap aman. 
+
+- **Penggunaan UUID:** Menggunakan UUID sebagai `productId` lebih aman dibandingkan ID yang mudah ditebak, misalnya integer increment.
+
+- **CSRF Protection:** Form yang dikirim melalui `POST` akan dilindungi dari serangan `CSRF`.
+
+- **Data Encapsulation:** Variabel `productData` di `ProductRepository` bersifat private, dan akses ke data dilakukan melalui metode yang menggunakan encapsulation.
+
+
+### Area Improvisasi
+
+Tentunya, Clean Code Principle dan Secure Coding Practice yang saya terapkan sudah saya improvisasi dibandingkan mengikuti penuh Tutorial 1. Akan tetapi, masih ada beberapa field yang dapat saya tingkatkan lagi, sebagai berikut
+
+- **Error Handling:** Code saya saat ini kurang menangani error dengan baik. Misalnya, jika `findById` tidak menemukan produk, ia mengembalikan `null`, yang dapat menyebabkan `NullPointerException`. Alternatifnya, saya bisa menggunakan `Optional` atau throw `Exception` yang sesuai.
+
+- **Validasi Tambahan:** Saat ini, validasi input hanya dilakukan pada sisi client (`HTML`). Akan lebih secure apabila saya nantinya menambahkan validasi pada sisi server atau back-end. Misalnya, validasi `productName` yang tidak boleh kosong atau `productQuantity` yang harus lebih dari 0.
+
+Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaimana Clean Code Principle dan Secure Coding Practices dapat diterapkan. Berikutnya, akan ada pembahasan lebih lanjut mengenai CI yang akan dibahas pada Refleksi 2.
+ 
