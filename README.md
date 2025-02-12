@@ -1,7 +1,7 @@
 <div align="center">
 
-## **Reflection - Pemrograman Lanjut**  
-**Daniel Ferdiansyah, 2306275052**  
+# **Reflection - Pemrograman Lanjut**  
+## Daniel Ferdiansyah, 2306275052  
 
 </div>
 
