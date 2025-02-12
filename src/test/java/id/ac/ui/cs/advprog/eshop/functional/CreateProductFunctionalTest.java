@@ -42,6 +42,7 @@ class CreateProductFunctionalTest {
         WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
 
         nameInput.sendKeys("Test Product");
+        quantityInput.clear();  // Make sure that input has been cleared
         quantityInput.sendKeys("10");
         submitButton.click();
 
