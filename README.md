@@ -49,6 +49,9 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 
 
  **1.** Setelah membuat unit test, saya merasa cukup secure karena dapat memastikan bahwa code yang telah saya buat dapat berjalan sebagaimana mestinya. Akan tetapi, ada bagian trickynya di mana saya perlu menulis code yang relatif repetitif dan terkadang terkesan membosankan. Atau mungkin memastikan edge case jika ke depannya saya perlu melakukan unit testing terhadap function yang lebih kompleks. Lalu
+ 
  **Berapa banyak unit test yang diperlukan dalam suatu class?** Unit test perlu dibuat sebisa mungkin dapat melakukan coverage seluruh bagian pada class. Misalnya, untuk semua logika bisnis atau method public. Lalu, unit test untuk skenario positif dan negatif. Serta, unit test untuk berbagai kemungkinan parameter.
+ 
  **Bagaimana memastikan kalau unit testnya sudah cukup?** Ada code coverage yang bisa dijadikan sebagai acuan seberapa banyak code dapat dieksekusi sesuai ekspektasi. Usahakan untuk membuat unit test dengan code coverage yang tinggi. Namun demikian, tetap perlu review dari tim yang memiliki kapabilitas sebagai tester.
+
  **Jika code coverage mencapai 100%, apakah program bebas bug?** Belum tentu. Karena unit test hanya akan berjalan seperti yang kita perintahkan. Unit test memastikan bahwa method yang kita buat memberi output sesuai dengan ekspektasi yang kita inginkan. Akan tetapi, tetap saja ada kemungkinan bug di luar method, misalnya bug yang terjadi akibat kesalahan integrasi antarkomponen code yang tidak terdteksi unit test.
