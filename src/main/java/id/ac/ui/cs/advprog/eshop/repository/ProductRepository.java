@@ -23,4 +23,14 @@ public class ProductRepository {
     public void delete(String productId) {
         productData.removeIf(product -> product.getProductId().equals(productId));
     }
+
+    public void update(Product updatedProduct) {
+        for (int i = 0; i < productData.size(); i++) {
+            Product product = productData.get(i);
+            if (product.getProductId().equals(updatedProduct.getProductId())) {
+                productData.set(i, updatedProduct);
+                break;
+            }
+        }
+    }
 }
