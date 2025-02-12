@@ -1,5 +1,5 @@
 # Reflection 1
----
+
 ### Clean Code Principle
 
 Clean code principle merupakan cara untuk menjadi seorang developer yang baik. Terutama, ketika bekerja dalam tim, kita perlu memastikan bahwa code yang kita buat dapat semudah mungkin dibaca, dimaintain, hingga diperbaiki oleh tim developer lain. Pada Tutorial 1, saya telah mempelajari dan menerapkan clean code principle berikut:
