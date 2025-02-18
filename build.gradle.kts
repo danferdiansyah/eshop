@@ -3,7 +3,6 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
-    id("org.sonarqube") version "3.3" // Tambahkan plugin SonarQube
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -43,16 +42,6 @@ dependencies {
     testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
     testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
-}
-
-// Konfigurasi SonarQube (SonarCloud)
-sonarqube {
-    properties {
-        property("sonar.projectKey", "id.ac.ui.cs.advprog:eshop")
-        property("sonar.organization", "danferdiansyah")
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.login", "5ea0d2bf20cdcea17fcc058cd511c8cf09a2897b")  // Ganti dengan token yang didapatkan
-    }
 }
 
 
