@@ -75,4 +75,21 @@ class ProductServiceImplTest {
 
         verify(productRepository, times(1)).delete(productId);
     }
+
+    @Test
+    void testFindProductById_Found() {
+        Product product = new Product();
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
+        String productId = product.getProductId();
+
+        Iterator<Product> iterator = Arrays.asList(product).iterator();
+        when(productRepository.findAll()).thenReturn(iterator);
+
+        Product foundProduct = productService.findById(productId);
+
+        assertNotNull(foundProduct);
+        assertEquals(productId, foundProduct.getProductId());
+        assertEquals("Laptop", foundProduct.getProductName());
+    }
 }
