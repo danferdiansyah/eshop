@@ -43,4 +43,18 @@ class ProductControllerTest {
                 .andExpect(view().name("createProduct"))
                 .andExpect(model().attributeExists("product"));
     }
+
+    @Test
+    void testCreateProductPost() throws Exception {
+        Product product = new Product();
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
+
+        mockMvc.perform(post("/product/create")
+                        .flashAttr("product", product))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product/list"));
+
+        verify(productService, times(1)).create(any(Product.class));
+    }
 }
