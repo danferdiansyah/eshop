@@ -1,6 +1,7 @@
 plugins {
     java
     jacoco
+    id("java")
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.sonarqube") version "6.0.1.5171"
@@ -8,10 +9,19 @@ plugins {
 
 group = "id.ac.ui.cs.advprog"
 version = "0.0.1-SNAPSHOT"
+java.sourceCompatibility = JavaVersion.VERSION_21
+
+sonar {
+    properties {
+        property("sonar.projectKey", "danferdiansyah_eshop")
+        property("sonar.organization", "danferdiansyah")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -31,35 +41,21 @@ val webdrivermanagerVersion = "5.6.3"
 val junitJupiterVersion = "5.9.1"
 
 dependencies {
-    // Dependencies for main app
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
 
-    // Dependencies for development (development-only)
+    compileOnly("org.projectlombok:lombok")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
-    // Dependencies for Lombok (Compile-time dan Annotation Processor)
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor("org.projectlombok:lombok")
 
-    // Dependencies for Testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
-
-    // Dependencies for Selenium Testing
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumJavaVersion")
     testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
     testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion")
-}
-
-sonar {
-    properties {
-        property("sonar.projectKey", "danferdiansyah_eshop")
-        property("sonar.organization", "danferdiansyah")
-        property("sonar.host.url", "https://sonarcloud.io")
-    }
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
 
 
@@ -95,13 +91,4 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
-    reports {
-        html.required = true
-        xml.required = true
-    }
 }
-
-tasks.build {
-    dependsOn(tasks.sonarqube)
-}
-
