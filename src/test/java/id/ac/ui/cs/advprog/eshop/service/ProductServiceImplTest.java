@@ -65,4 +65,14 @@ class ProductServiceImplTest {
         assertEquals("Laptop", productList.get(0).getProductName());
         assertEquals("Phone", productList.get(1).getProductName());
     }
+
+    @Test
+    void testDeleteProduct() {
+        String productId = "some-random-id";
+        doNothing().when(productRepository).delete(productId);
+
+        productService.delete(productId);
+
+        verify(productRepository, times(1)).delete(productId);
+    }
 }
