@@ -31,10 +31,3 @@ jobs:
           name: jacoco-report
           path: build/reports/jacoco/test/html
 
-      - name: Set up SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v2.0
-        with:
-          sonar-token: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Run SonarCloud analysis
-        run: ./gradlew sonarqube
