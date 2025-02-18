@@ -28,4 +28,22 @@ class ProductServiceImplTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    void testCreateProduct() {
+        Product product = new Product();
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
+
+        when(productRepository.create(product)).thenReturn(product);
+
+        Product createdProduct = productService.create(product);
+
+        assertNotNull(createdProduct);
+        assertNotNull(createdProduct.getProductId());
+        assertEquals("Laptop", createdProduct.getProductName());
+        assertEquals(10, createdProduct.getProductQuantity());
+
+        verify(productRepository, times(1)).create(product);
+    }
+
 }
