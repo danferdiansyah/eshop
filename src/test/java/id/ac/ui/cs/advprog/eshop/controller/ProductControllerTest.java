@@ -97,4 +97,18 @@ class ProductControllerTest {
 
         verify(productService, times(1)).findById("test-id");
     }
+
+    @Test
+    void testEditProductPost() throws Exception {
+        Product product = new Product();
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
+
+        mockMvc.perform(post("/product/edit")
+                        .flashAttr("product", product))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product/list"));
+
+        verify(productService, times(1)).update(any(Product.class));
+    }
 }
