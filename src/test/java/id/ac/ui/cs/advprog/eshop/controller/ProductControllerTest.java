@@ -70,4 +70,16 @@ class ProductControllerTest {
 
         verify(productService, times(1)).findAll();
     }
+
+    @Test
+    void testDeleteProductPost() throws Exception {
+        String productId = "test-id";
+
+        mockMvc.perform(post("/product/delete/{productId}", productId))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product/list"));
+
+        verify(productService, times(1)).delete(productId);
+    }
+
 }
