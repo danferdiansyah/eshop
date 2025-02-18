@@ -1,7 +1,5 @@
 name: Continuous Integration (CI)
 
-# Run CI jobs on all branches
-
 on:
   push:
   pull_request:
@@ -23,10 +21,20 @@ jobs:
         run: chmod +x gradlew
       - name: Run unit tests
         run: ./gradlew test
+
       - name: Generate JaCoCo coverage report
         run: ./gradlew jacocoTestReport
+
       - name: Upload coverage report to GitHub Actions
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: build/reports/jacoco/test/html
+
+      - name: Set up SonarCloud
+        uses: SonarSource/sonarcloud-github-action@v2.0
+        with:
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Run SonarCloud analysis
+        run: ./gradlew sonarqube

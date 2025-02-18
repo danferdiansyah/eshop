@@ -3,6 +3,7 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.sonarqube") version "3.3" // Tambahkan plugin SonarQube
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -44,7 +45,18 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
 
-tasks.register<Test>("unitTest"){
+// Konfigurasi SonarQube (SonarCloud)
+sonarqube {
+    properties {
+        property("sonar.projectKey", "id.ac.ui.cs.advprog:eshop")
+        property("sonar.organization", "danferdiansyah")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.login", "5ea0d2bf20cdcea17fcc058cd511c8cf09a2897b")  // Ganti dengan token yang didapatkan
+    }
+}
+
+
+tasks.register<Test>("unitTest") {
     description = "Runs unit tests."
     group = "verification"
 
@@ -53,7 +65,7 @@ tasks.register<Test>("unitTest"){
     }
 }
 
-tasks.register<Test>("functionalTest"){
+tasks.register<Test>("functionalTest") {
     description = "Runs functional tests."
     group = "verification"
 
@@ -66,7 +78,7 @@ tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
-tasks.test{
+tasks.test {
     filter {
         excludeTestsMatching("*FunctionalTest")
     }
@@ -74,11 +86,15 @@ tasks.test{
     finalizedBy(tasks.jacocoTestReport)
 }
 
-tasks.jacocoTestReport{
+tasks.jacocoTestReport {
     dependsOn(tasks.test)
     reports {
         html.required = true
         xml.required = true
     }
+}
+
+tasks.build {
+    dependsOn(tasks.sonarqube)
 }
 
