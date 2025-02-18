@@ -57,4 +57,17 @@ class ProductControllerTest {
 
         verify(productService, times(1)).create(any(Product.class));
     }
+
+    @Test
+    void testProductListPage() throws Exception {
+        List<Product> products = Arrays.asList(new Product(), new Product());
+        when(productService.findAll()).thenReturn(products);
+
+        mockMvc.perform(get("/product/list"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("productList"))
+                .andExpect(model().attributeExists("products"));
+
+        verify(productService, times(1)).findAll();
+    }
 }
