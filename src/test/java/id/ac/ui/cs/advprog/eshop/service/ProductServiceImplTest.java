@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -91,5 +92,15 @@ class ProductServiceImplTest {
         assertNotNull(foundProduct);
         assertEquals(productId, foundProduct.getProductId());
         assertEquals("Laptop", foundProduct.getProductName());
+    }
+
+    @Test
+    void testFindProductById_NotFound() {
+        Iterator<Product> iterator = Collections.emptyIterator();
+        when(productRepository.findAll()).thenReturn(iterator);
+
+        Product foundProduct = productService.findById("non-existent-id");
+
+        assertNull(foundProduct);
     }
 }
