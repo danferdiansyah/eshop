@@ -103,4 +103,17 @@ class ProductServiceImplTest {
 
         assertNull(foundProduct);
     }
+
+    @Test
+    void testUpdateProduct() {
+        Product product = new Product();
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
+
+        doNothing().when(productRepository).update(product);
+
+        productService.update(product);
+
+        verify(productRepository, times(1)).update(product);
+    }
 }
