@@ -54,7 +54,6 @@ dependencies {
     testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion")
 }
 
-
 sonar {
     properties {
         property("sonar.projectKey", "danferdiansyah_eshop")
