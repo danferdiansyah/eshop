@@ -82,4 +82,19 @@ class ProductControllerTest {
         verify(productService, times(1)).delete(productId);
     }
 
+    @Test
+    void testEditProductPage() throws Exception {
+        Product product = new Product();
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
+
+        when(productService.findById("test-id")).thenReturn(product);
+
+        mockMvc.perform(get("/product/edit/{productId}", "test-id"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("editProduct"))
+                .andExpect(model().attributeExists("product"));
+
+        verify(productService, times(1)).findById("test-id");
+    }
 }
