@@ -3,6 +3,7 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.4.2"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.sonarqube") version "6.0.1.5171"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -44,7 +45,16 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
 }
 
-tasks.register<Test>("unitTest"){
+sonar {
+    properties {
+        property("sonar.projectKey", "danferdiansyah_eshop")
+        property("sonar.organization", "danferdiansyah")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
+
+
+tasks.register<Test>("unitTest") {
     description = "Runs unit tests."
     group = "verification"
 
@@ -53,7 +63,7 @@ tasks.register<Test>("unitTest"){
     }
 }
 
-tasks.register<Test>("functionalTest"){
+tasks.register<Test>("functionalTest") {
     description = "Runs functional tests."
     group = "verification"
 
@@ -66,7 +76,7 @@ tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
-tasks.test{
+tasks.test {
     filter {
         excludeTestsMatching("*FunctionalTest")
     }
@@ -74,11 +84,15 @@ tasks.test{
     finalizedBy(tasks.jacocoTestReport)
 }
 
-tasks.jacocoTestReport{
+tasks.jacocoTestReport {
     dependsOn(tasks.test)
     reports {
         html.required = true
         xml.required = true
     }
+}
+
+tasks.build {
+    dependsOn(tasks.sonarqube)
 }
 
