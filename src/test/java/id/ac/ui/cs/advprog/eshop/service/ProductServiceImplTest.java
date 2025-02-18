@@ -46,4 +46,23 @@ class ProductServiceImplTest {
         verify(productRepository, times(1)).create(product);
     }
 
+    @Test
+    void testFindAllProducts() {
+        Product product1 = new Product();
+        product1.setProductName("Laptop");
+        product1.setProductQuantity(10);
+
+        Product product2 = new Product();
+        product2.setProductName("Phone");
+        product2.setProductQuantity(5);
+
+        Iterator<Product> iterator = Arrays.asList(product1, product2).iterator();
+        when(productRepository.findAll()).thenReturn(iterator);
+
+        List<Product> productList = productService.findAll();
+
+        assertEquals(2, productList.size());
+        assertEquals("Laptop", productList.get(0).getProductName());
+        assertEquals("Phone", productList.get(1).getProductName());
+    }
 }
