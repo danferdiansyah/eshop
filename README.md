@@ -71,3 +71,19 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 - **Poor Maintainability:** Misal ada perubahan yang dilakukan di instance variable, maka kita perlu mengubah dua class: `CreateProductFunctionalTest.java` dan class baru yang telah dibuat.
 
 **Solusinya,** dapat direfactor dengan membuat base test case, misalnya `BaseFunctionalTest.java` yang berisi instance variable dan setup procedure. Lalu, `CreateProductFunctionalTest`.java dapat meng-*inherit* base test tersebut dengan ditambah method tambahan sesuai dengan testing yang akan dilakukan. Sama halnya untuk class baru, bisa langsung meng-*inherit* base test dan kemudian ditambah dengan method untuk menghitung banyaknya row/produk yang telah dibuat.
+
+---
+
+# Reflection 3
+
+**1.** Setelah mengintegrasikan dengan Sonarcloud, ada beberapa issue yang bisa diperbaiki. Namun demikian, beberapa issue tersebut bukanlah issue yang major. Hanya perbaikan minor dan relatif cepat untuk diselesaikan. Dua di antaranya adalah:
+
+- **Removing Unused Imports**. Sesuai dengan prinsip clean code, apabila ada import yang tidak diperlukan lebih baik dihapus saja. Kebanyakan, import yang saya hapus merupakan class dari modul yang digunakan untuk testing dan aman dihapus (karena memang tidak digunakan).
+  
+- **Dependency Grouping**. Hal ini juga masih berkaitan dengan clean code principle. Code akan lebih mudah terbaca dan mudah untuk direview jika dependency yang saya gunakan digroup berdasarkan fungsionalitasnya. Misalnya ada dependency grouping untuk program utama, development, ci/cd, sampai testing. Untuk masalah ini hanya perlu memperbarui satu komponen saja, yaitu `build.gradle.kts`.
+
+**2.** Ya, implementasi sekarang saya rasa sudah cukup qualified untuk dikatakan sebagai continuous integration dan continuous development. Mari breakdown satu-satu:
+
+- **Continuous Integration**: Di workflow saya, ada `ci.yml` yang berfungsi untuk melakukan build yang dilakukan gradle tiap kali saya melakukan `push` ke repository. Lebih lanjut, di `ci.yml` juga ada konfigurasi untuk membuat laporan JaCoCo baik secara local maupun melalui GitHub actions. Selain itu, ada juga `build.yml` yang dipakai untuk melakukan build sekaligus analisis menggunakan Sonarcloud sesuai dengan token project yand diperoleh di Sonarcloud dan yang ada pada GitHub secret. Jadi, `ci.yml` dan `build.yml` sudah memenuhi kriteria Continuous Integration.
+
+- **Continuous Development**: 
