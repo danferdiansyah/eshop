@@ -86,4 +86,6 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 
 - **Continuous Integration**: Di workflow saya, ada `ci.yml` yang berfungsi untuk melakukan build yang dilakukan gradle tiap kali saya melakukan `push` ke repository. Lebih lanjut, di `ci.yml` juga ada konfigurasi untuk membuat laporan JaCoCo baik secara local maupun melalui GitHub actions. Selain itu, ada juga `build.yml` yang dipakai untuk melakukan build sekaligus analisis menggunakan Sonarcloud sesuai dengan token project yand diperoleh di Sonarcloud dan yang ada pada GitHub secret. Jadi, `ci.yml` dan `build.yml` sudah memenuhi kriteria Continuous Integration.
 
-- **Continuous Development**: 
+- **Continuous Development**: Di workflow saya, juga ada `cd.yml` yang berfungsi untuk mengatur deployment Koyeb secara otomatis tiap ada push ke branch `master`.
+
+Jadi, workflow saya bisa dikatakan sudah menerapkan Continuous Integration dan Continuous Deployment.
