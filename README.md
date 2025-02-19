@@ -60,6 +60,7 @@ Tentunya, Clean Code Principle dan Secure Coding Practice yang saya terapkan sud
 Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaimana Clean Code Principle dan Secure Coding Practices dapat diterapkan. Berikutnya, akan ada pembahasan lebih lanjut mengenai CI yang akan dibahas pada Refleksi 2.
 
 
+
  # Reflection 2
 
 
