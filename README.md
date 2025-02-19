@@ -5,6 +5,14 @@
 
 </div>
 
+---
+
+<div align="center">
+
+# Assignment 1
+
+</div>
+
 
 # Reflection 1
 
@@ -51,7 +59,7 @@ Tentunya, Clean Code Principle dan Secure Coding Practice yang saya terapkan sud
 
 Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaimana Clean Code Principle dan Secure Coding Practices dapat diterapkan. Berikutnya, akan ada pembahasan lebih lanjut mengenai CI yang akan dibahas pada Refleksi 2.
 
- ---
+
 
  # Reflection 2
 
@@ -74,7 +82,14 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 
 ---
 
-# Reflection 3
+<div align="center">
+
+# Assignment 2
+
+</div>
+
+
+# Reflection 1
 
 **1.** Setelah mengintegrasikan dengan Sonarcloud, ada beberapa issue yang bisa diperbaiki. Namun demikian, beberapa issue tersebut bukanlah issue yang major. Hanya perbaikan minor dan relatif cepat untuk diselesaikan. Dua di antaranya adalah:
 
@@ -86,6 +101,6 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 
 - **Continuous Integration**: Di workflow saya, ada `ci.yml` yang berfungsi untuk melakukan build yang dilakukan gradle tiap kali saya melakukan `push` ke repository. Lebih lanjut, di `ci.yml` juga ada konfigurasi untuk membuat laporan JaCoCo baik secara local maupun melalui GitHub actions. Selain itu, ada juga `build.yml` yang dipakai untuk melakukan build sekaligus analisis menggunakan Sonarcloud sesuai dengan token project yand diperoleh di Sonarcloud dan yang ada pada GitHub secret. Jadi, `ci.yml` dan `build.yml` sudah memenuhi kriteria Continuous Integration.
 
-- **Continuous Development**: Di workflow saya, juga ada `cd.yml` yang berfungsi untuk mengatur deployment Koyeb secara otomatis tiap ada push ke branch `master`.
+- **Continuous Development**: Repository telah terhubung dengan Koyeb, yang akan dideploy secara otomatis setiap ada `push` pada branch `master`.
 
 Jadi, workflow saya bisa dikatakan sudah menerapkan Continuous Integration dan Continuous Deployment.
