@@ -2,8 +2,8 @@ package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Car;
 import id.ac.ui.cs.advprog.eshop.model.Product;
-import id.ac.ui.cs.advprog.eshop.service.CarService;
-import id.ac.ui.cs.advprog.eshop.service.ProductService;
+import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
+import id.ac.ui.cs.advprog.eshop.service.ProductServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService service;
+    private ProductServiceImpl service;
 
     @GetMapping("/create")
     public String createProductPage(Model model) {
@@ -41,7 +41,7 @@ public class ProductController {
 
     @PostMapping("/delete/{productId}")
     public String deleteProductPost(@PathVariable String productId, RedirectAttributes redirectAttributes) {
-        service.delete(productId);
+        service.deleteById(productId);
         return "redirect:/product/list";
     }
 
@@ -54,7 +54,7 @@ public class ProductController {
 
     @PostMapping("/edit")
     public String editProductPost(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
-        service.update(product);
+        service.update(product.getProductId(), product);
         return "redirect:/product/list";
     }
 }
@@ -63,7 +63,7 @@ public class ProductController {
 @RequestMapping("/car")
 class CarController extends ProductController {
     @Autowired
-    private CarService carService;
+    private CarServiceImpl carService;
 
     @GetMapping("/createCar")
     public String createCarPage(Model model) {
@@ -102,7 +102,7 @@ class CarController extends ProductController {
 
     @PostMapping("/deleteCar")
     public String deleteCarPost(@RequestParam("carId") String carId){
-        carService.deleteCarById(carId);
+        carService.deleteById(carId);
         return "redirect:listCar";
     }
 }
