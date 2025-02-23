@@ -72,7 +72,7 @@ class ProductServiceImplTest {
         String productId = "some-random-id";
         doNothing().when(productRepository).delete(productId);
 
-        productService.delete(productId);
+        productService.deleteById(productId);
 
         verify(productRepository, times(1)).delete(productId);
     }
@@ -112,7 +112,7 @@ class ProductServiceImplTest {
 
         doNothing().when(productRepository).update(product);
 
-        productService.update(product);
+        productService.update(id, product);
 
         verify(productRepository, times(1)).update(product);
     }
