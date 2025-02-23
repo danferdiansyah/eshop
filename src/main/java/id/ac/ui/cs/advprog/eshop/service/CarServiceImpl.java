@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+@Service
 public class CarServiceImpl implements CarService {
     @Autowired
     private CarRepository carRepository;
