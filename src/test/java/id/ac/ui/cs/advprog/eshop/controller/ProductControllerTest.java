@@ -1,135 +1,128 @@
-package id.ac.ui.cs.advprog.eshop.repository;
+package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
+import id.ac.ui.cs.advprog.eshop.service.ProductServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductControllerTest {
+class ProductControllerTest {
+
+    private MockMvc mockMvc;
+
+    @Mock
+    private ProductServiceImpl productService;
 
     @InjectMocks
-    ProductRepository productRepository;
+    private ProductController productController;
 
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
     }
 
     @Test
-    void testCreateProduct() {
+    void testCreateProductPage() throws Exception {
+        mockMvc.perform(get("/product/create"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("CreateProduct"))
+                .andExpect(model().attributeExists("product"));
+    }
+
+    @Test
+    void testCreateProductPost() throws Exception {
         Product product = new Product();
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(100);
-        Product createdProduct = productRepository.create(product);
+        product.setProductId("1");
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
 
-        assertNotNull(createdProduct.getProductId());
-        assertEquals("Sampo Cap Bambang", createdProduct.getProductName());
-        assertEquals(100, createdProduct.getProductQuantity());
+        when(productService.create(any(Product.class))).thenReturn(product);
 
-        Iterator<Product> productIterator = productRepository.findAll();
-        assertTrue(productIterator.hasNext());
-        Product savedProduct = productIterator.next();
-        assertEquals(createdProduct.getProductId(), savedProduct.getProductId());
-        assertEquals(createdProduct.getProductName(), savedProduct.getProductName());
-        assertEquals(createdProduct.getProductQuantity(), savedProduct.getProductQuantity());
+        mockMvc.perform(post("/product/create")
+                        .flashAttr("product", product))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product/list"));
+
+        verify(productService, times(1)).create(any(Product.class));
     }
 
     @Test
-    void testFindAllIfEmpty() {
-        Iterator<Product> productIterator = productRepository.findAll();
-        assertFalse(productIterator.hasNext());
-    }
-
-    @Test
-    void testFindAllMoreThanOneProduct() {
+    void testProductListPage() throws Exception {
         Product product1 = new Product();
-        product1.setProductName("Sampo Cap Bambang");
-        product1.setProductQuantity(100);
-        productRepository.create(product1);
+        product1.setProductId("1");
+        product1.setProductName("Laptop");
+        product1.setProductQuantity(10);
 
         Product product2 = new Product();
-        product2.setProductName("Sampo Cap Usep");
-        product2.setProductQuantity(50);
-        productRepository.create(product2);
+        product2.setProductId("2");
+        product2.setProductName("Phone");
+        product2.setProductQuantity(5);
 
-        Iterator<Product> productIterator = productRepository.findAll();
-        assertTrue(productIterator.hasNext());
-        Product savedProduct = productIterator.next();
-        assertEquals(product1.getProductId(), savedProduct.getProductId());
-        assertEquals(product1.getProductName(), savedProduct.getProductName());
-        assertEquals(product1.getProductQuantity(), savedProduct.getProductQuantity());
+        List<Product> productList = Arrays.asList(product1, product2);
+        when(productService.findAll()).thenReturn(productList);
 
-        savedProduct = productIterator.next();
-        assertEquals(product2.getProductId(), savedProduct.getProductId());
-        assertEquals(product2.getProductName(), savedProduct.getProductName());
-        assertEquals(product2.getProductQuantity(), savedProduct.getProductQuantity());
-
-        assertFalse(productIterator.hasNext());
+        mockMvc.perform(get("/product/list"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("ProductList"))
+                .andExpect(model().attributeExists("products"));
     }
 
     @Test
-    void testDeleteProduct() {
-        Product product = new Product();
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(100);
-        productRepository.create(product);
+    void testDeleteProductPost() throws Exception {
+        String productId = "1";
+        doNothing().when(productService).deleteById(productId);
 
-        productRepository.delete(product.getProductId());
+        mockMvc.perform(post("/product/delete/{productId}", productId))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product/list"));
 
-        Iterator<Product> productIterator = productRepository.findAll();
-        assertFalse(productIterator.hasNext());
+        verify(productService, times(1)).deleteById(productId);
     }
 
     @Test
-    void testUpdateProduct() {
+    void testEditProductPage() throws Exception {
         Product product = new Product();
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(100);
-        productRepository.create(product);
+        product.setProductId("1");
+        product.setProductName("Laptop");
+        product.setProductQuantity(10);
 
-        Product updatedProduct = new Product();
-        updatedProduct.setProductName("Sampo Cap Updated");
-        updatedProduct.setProductQuantity(200);
-        Product result = productRepository.update(product.getProductId(), updatedProduct);
+        when(productService.findById("1")).thenReturn(product);
 
-        assertNotNull(result);
-        assertEquals(product.getProductId(), result.getProductId());
-        assertEquals("Sampo Cap Updated", result.getProductName());
-        assertEquals(200, result.getProductQuantity());
-
-        Iterator<Product> productIterator = productRepository.findAll();
-        assertTrue(productIterator.hasNext());
-        Product savedProduct = productIterator.next();
-        assertEquals(product.getProductId(), savedProduct.getProductId());
-        assertEquals("Sampo Cap Updated", savedProduct.getProductName());
-        assertEquals(200, savedProduct.getProductQuantity());
+        mockMvc.perform(get("/product/edit/{productId}", "1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("EditProduct"))
+                .andExpect(model().attributeExists("product"));
     }
 
     @Test
-    void testUpdateProductWithInvalidId() {
+    void testEditProductPost() throws Exception {
         Product product = new Product();
-        product.setProductName("Sampo Cap Bambang");
-        product.setProductQuantity(100);
-        productRepository.create(product);
+        product.setProductId("1");
+        product.setProductName("Laptop Updated");
+        product.setProductQuantity(15);
 
-        Product updatedProduct = new Product();
-        updatedProduct.setProductName("Sampo Cap Updated");
-        updatedProduct.setProductQuantity(200);
-        Product result = productRepository.update("invalid-id", updatedProduct);
+        doNothing().when(productService).update(eq("1"), any(Product.class));
 
-        assertNull(result);
+        mockMvc.perform(post("/product/edit")
+                        .flashAttr("product", product))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product/list"));
 
-        Iterator<Product> productIterator = productRepository.findAll();
-        assertTrue(productIterator.hasNext());
-        Product savedProduct = productIterator.next();
-        assertEquals(product.getProductId(), savedProduct.getProductId());
-        assertEquals("Sampo Cap Bambang", savedProduct.getProductName());
-        assertEquals(100, savedProduct.getProductQuantity());
+        verify(productService, times(1)).update(eq("1"), any(Product.class));
     }
 }
