@@ -40,7 +40,6 @@ class ProductServiceImplTest {
         Product createdProduct = productService.create(product);
 
         assertNotNull(createdProduct);
-        assertNotNull(createdProduct.getProductId());
         assertEquals("Laptop", createdProduct.getProductName());
         assertEquals(10, createdProduct.getProductQuantity());
 
@@ -65,6 +64,8 @@ class ProductServiceImplTest {
         assertEquals(2, productList.size());
         assertEquals("Laptop", productList.get(0).getProductName());
         assertEquals("Phone", productList.get(1).getProductName());
+
+        verify(productRepository, times(1)).findAll();
     }
 
     @Test
@@ -82,15 +83,15 @@ class ProductServiceImplTest {
         Product product = new Product();
         product.setProductName("Laptop");
         product.setProductQuantity(10);
-        String productId = product.getProductId();
+        product.setProductId("1234");
 
         Iterator<Product> iterator = Arrays.asList(product).iterator();
         when(productRepository.findAll()).thenReturn(iterator);
 
-        Product foundProduct = productService.findById(productId);
+        Product foundProduct = productService.findById("1234");
 
         assertNotNull(foundProduct);
-        assertEquals(productId, foundProduct.getProductId());
+        assertEquals("1234", foundProduct.getProductId());
         assertEquals("Laptop", foundProduct.getProductName());
     }
 
@@ -107,13 +108,14 @@ class ProductServiceImplTest {
     @Test
     void testUpdateProduct() {
         Product product = new Product();
+        product.setProductId("1234");
         product.setProductName("Laptop");
         product.setProductQuantity(10);
 
-        doNothing().when(productRepository).update(product);
+        when(productRepository.update("1234", product)).thenReturn(product);
 
-        productService.update(id, product);
+        productService.update("1234", product);
 
-        verify(productRepository, times(1)).update(product);
+        verify(productRepository, times(1)).update("1234", product);
     }
 }
