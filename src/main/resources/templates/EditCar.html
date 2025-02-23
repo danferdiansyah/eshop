@@ -18,7 +18,7 @@
     </div>
     <!-- Form body -->
     <div class="bg-white shadow-lg rounded-b-lg p-6">
-        <form th:action="@{/car/editCar}" th:object="${car}" method="post">
+        <form th:action="@{/car/edit}" th:object="${car}" method="post">
             <input type="hidden" th:field="*{carId}" />
 
             <!-- Car Name Field -->
@@ -48,7 +48,7 @@
         </form>
 
         <!-- Back to Car List Link -->
-        <a th:href="@{/car/listCar}" class="mt-4 inline-flex items-center text-[#2d2d2d] hover:text-[#121212] transition-colors">
+        <a th:href="@{/car/list}" class="mt-4 inline-flex items-center text-[#2d2d2d] hover:text-[#121212] transition-colors">
             <i class="bi bi-arrow-left mr-2"></i> Back to Car List
         </a>
     </div>
