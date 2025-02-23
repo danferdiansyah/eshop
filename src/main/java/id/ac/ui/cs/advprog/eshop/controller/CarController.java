@@ -1,7 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Car;
-import id.ac.ui.cs.advprog.eshop.service.BaseService;
+import id.ac.ui.cs.advprog.eshop.service.CarServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/car")
 class CarController {
     @Autowired
-    private BaseService<Car> carService;
+    private CarServiceImpl carService;
 
     @GetMapping("/create")
     public String createCarPage(Model model) {
