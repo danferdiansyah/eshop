@@ -25,8 +25,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.java') }}
+          restore-keys: |
+            ${{ runner.os }}-sonar-
       - name: Cache Gradle packages
         uses: actions/cache@v4
         with:
