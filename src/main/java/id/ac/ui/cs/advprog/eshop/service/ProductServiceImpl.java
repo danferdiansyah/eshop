@@ -47,7 +47,7 @@ public class ProductServiceImpl implements BaseService<Product> {
     }
 
     @Override
-    public void update(String id, Product product) {
-        productRepository.update(product);
+    public void update(String productId, Product product) {
+        productRepository.update(productId, product);
     }
 }
