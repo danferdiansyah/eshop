@@ -116,7 +116,7 @@ Jadi, workflow saya bisa dikatakan sudah menerapkan Continuous Integration dan C
 
 # Reflection 
 
-**1.** Saya menerapkan prinsip SOLID dalam assignment 3. Detailnya sebagai berikut
+**1.** Saya menerapkan prinsip SOLID principle dalam assignment 3. Detailnya sebagai berikut
 
 - **SRP (Single Responsibility Principle):** Saya melakukan refactoring yang cukup ideal. Pada Tutorial 3, jika mengikuti penuh, class `CarController` diletakkan dalam satu file dengan `ProductController`. Selain itu, `CarController` juga meng-inherit `ProductController`. Isu yang saya lihat di sini adalah `CarController` unnecessarily melakukan inheritance terhadap `ProductController`, padahal keduanya menangani dua model yang berbeda yaitu `product` dan `car`. Sehingga, saya melakukan refactoring dengan memisah kedua class, memastikan bahwa tiap class hanya akan menjalankan satu responsibility major saja. 
 
@@ -127,3 +127,25 @@ Jadi, workflow saya bisa dikatakan sudah menerapkan Continuous Integration dan C
 - **ISP (Interface Segregation Principle):** Tidak ada pelanggaran ISP. Kasusnya sama seperti poin kedua dan ketiga. Interface `BaseService` sudah cukup efektif dan efisien, tidak ada method yang berlebihan, serta semua method yang ada pada `BaseService` memang benar-benar diperlukan.
 
 - **DIP (Dependency Inversion Principle):** Pada controller, daripada mengimplementasi konkret class seperti `CarServiceImpl` atau `ProductServiceImpl`, saya menerapkan interface abstract `BaseService<T>`. T bisa berupa model car maupun product. Hal ini sejalan dengan prinsip Dependency Inversion Principle, di mana modul tingkat tinggi seharusnya bergantung pada abstraksi, bukan modul tingkat rendah.
+
+**2.** Setelah menerapkan SOLID principle, codebase project saya terasa jadi lebih rapi dan lebih mudah untuk dimaintain. misalnya dengan menerapkan `BaseSrevice`
+```java
+package id.ac.ui.cs.advprog.eshop.service;
+
+import id.ac.ui.cs.advprog.eshop.model.Car;
+
+import java.util.List;
+
+public interface BaseService<T> {
+    T create(T item);
+    List<T> findAll();
+    T findById(String id);
+    void update(String Id, T item);
+    void deleteById(String id);
+}
+```
+saya tidak perlu membuat dua code interface yang berbeda untuk model product dan car. Sehingga, pekerjaan jadi lebih mudah. Terlebih, jika ke depannya akan ada model tambahan, saya hanya perlu membuat implementasinya saja untuk model tersebut. 
+
+Selain itu, prinsip SOLID juga saya terapkan di Controller, di mana saya memisahkan controller untuk product dan car. Hal ini membuat readablity meningkat. Menghilangkan dependency yang kurang diperlukan (seperti `CarController` menginherit `ProductController`) juga akan 'menyelamatkan' saya dari beberapa problem yang tidak diinginkan ke depannya.
+
+**3.** Andai saya tidak menerapkan SOLID, salah satu disadvantage yang cukup terasa adalah mengenai modul `service`. Jika saya membuat implementasi untuk model yang baru, saya perlu membuat interface untuk masing-masing model, bahkan jika setup methodnya relatif sama. Hal ini akan membuat pekerjaan terasa lebih lama dan melelahkan. Selain itu, misal `CarController` tetap menjadi subclass `ProductController`, hal ini bisa mengurangi maintainability. Walaupun tidak ada method yang dioverride, akan tetapi kita bisa melakukan pemanggilan method yang sebenarnya hanya untuk model product melalui controller model car. Hal ini kurang diinginkan dan perlu dihindari. Sehingga, overall jika saya tidak menerapkan SOLID, code yang saya buat akan lebih susah dimaintain daripada code yang sekarang.
