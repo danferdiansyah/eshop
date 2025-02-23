@@ -89,7 +89,7 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 </div>
 
 
-# Reflection 1
+# Reflection 
 
 **1.** Setelah mengintegrasikan dengan Sonarcloud, ada beberapa issue yang bisa diperbaiki. Namun demikian, beberapa issue tersebut bukanlah issue yang major. Hanya perbaikan minor dan relatif cepat untuk diselesaikan. Dua di antaranya adalah:
 
@@ -104,3 +104,26 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 - **Continuous Development**: Repository telah terhubung dengan Koyeb, yang akan dideploy secara otomatis setiap ada `push` pada branch `master`.
 
 Jadi, workflow saya bisa dikatakan sudah menerapkan Continuous Integration dan Continuous Deployment.
+
+---
+
+<div align="center">
+
+# Assignment 3
+
+</div>
+
+
+# Reflection 
+
+**1.** Saya menerapkan prinsip SOLID dalam assignment 3. Detailnya sebagai berikut
+
+- **SRP (Single Responsibility Principle):** Saya melakukan refactoring yang cukup ideal. Pada Tutorial 3, jika mengikuti penuh, class `CarController` diletakkan dalam satu file dengan `ProductController`. Selain itu, `CarController` juga meng-inherit `ProductController`. Isu yang saya lihat di sini adalah `CarController` unnecessarily melakukan inheritance terhadap `ProductController`, padahal keduanya menangani dua model yang berbeda yaitu `product` dan `car`. Sehingga, saya melakukan refactoring dengan memisah kedua class, memastikan bahwa tiap class hanya akan menjalankan satu responsibility major saja. 
+
+- **OCP (Open/Closed Principle):** Daripada membuat dua interface yang kegunaannya mirip, saya menjadikan `ProductService` dan `CarService` menjadi `BaseService`. Isi dari `BaseService` merupakan setup method yang ada pada kedua services tersebut, seperti `create`, `update`, `deleteById`, `findById`, dan `findAll`. Saya masih bisa memodifikasi secara terbuka (Open) implementasi dari Base Service, misalnya menambahkan method atau variable baru pada `CarServiceImpl` dan `ProductServiceImpl`. Akan tetapi, Base Service tidak dapat dimodifikasi (Closed) karena sudah menampung semua setup method yang penting.
+
+- **LSP (Liskov Segregation Principle):** Interface `BaseService` yang saya buat dirancang seminimal mungkin, sehingga tidak ada method yang tidak dioverride oleh class yang mengimplementasinya. Hal ini sejalan dengan Liskov Segregation Principle, di mana subclass yang dibuat (dalam hal ini implementasi dari  `CarServiceImpl` dan `ProductServiceImpl`) dapat menggantikan `BaseService` tanpa mengubah behavior `BaseService` itu sendiri dikarenakan semua yang ada pada `BaseService` diimplement dengan tepat dan efektif pada semua subclassnya.
+ 
+- **ISP (Interface Segregation Principle):** Tidak ada pelanggaran ISP. Kasusnya sama seperti poin kedua dan ketiga. Interface `BaseService` sudah cukup efektif dan efisien, tidak ada method yang berlebihan, serta semua method yang ada pada `BaseService` memang benar-benar diperlukan.
+
+- **DIP (Dependency Inversion Principle):** Pada controller, daripada mengimplementasi konkret class seperti `CarServiceImpl` atau `ProductServiceImpl`, saya menerapkan interface abstract `BaseService<T>`. T bisa berupa model car maupun product. Hal ini sejalan dengan prinsip Dependency Inversion Principle, di mana modul tingkat tinggi seharusnya bergantung pada abstraksi, bukan modul tingkat rendah.
