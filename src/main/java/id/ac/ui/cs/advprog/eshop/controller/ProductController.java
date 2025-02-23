@@ -1,7 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
-import id.ac.ui.cs.advprog.eshop.service.ProductService;
+import id.ac.ui.cs.advprog.eshop.service.BaseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService service;
+    private BaseService<Product> service;
 
     @GetMapping("/create")
     public String createProductPage(Model model) {
@@ -39,7 +39,7 @@ public class ProductController {
 
     @PostMapping("/delete/{productId}")
     public String deleteProductPost(@PathVariable String productId, RedirectAttributes redirectAttributes) {
-        service.delete(productId);
+        service.deleteById(productId);
         return "redirect:/product/list";
     }
 
