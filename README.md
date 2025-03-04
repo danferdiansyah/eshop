@@ -7,12 +7,10 @@
 
 ---
 
-<div align="center">
 
-# Assignment 1
-
-</div>
-
+<details>
+<summary><b>Assigment 1</b></summary>
+<br>
 
 # Reflection 1
 
@@ -82,11 +80,9 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 
 ---
 
-<div align="center">
-
-# Assignment 2
-
-</div>
+<details>
+<summary><b>Assignment 2</b></summary>
+<br>
 
 
 # Reflection 
@@ -106,12 +102,11 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 Jadi, workflow saya bisa dikatakan sudah menerapkan Continuous Integration dan Continuous Deployment.
 
 ---
+</details>
 
-<div align="center">
-
-# Assignment 3
-
-</div>
+<details>
+<summary><b>Assignment 3</b></summary>
+<br>
 
 
 # Reflection 
@@ -149,3 +144,5 @@ saya tidak perlu membuat dua code interface yang berbeda untuk model product dan
 Selain itu, prinsip SOLID juga saya terapkan di Controller, di mana saya memisahkan controller untuk product dan car. Hal ini membuat readablity meningkat. Menghilangkan dependency yang kurang diperlukan (seperti `CarController` menginherit `ProductController`) juga akan 'menyelamatkan' saya dari beberapa problem yang tidak diinginkan ke depannya.
 
 **3.** Andai saya tidak menerapkan SOLID, salah satu disadvantage yang cukup terasa adalah mengenai modul `service`. Jika saya membuat implementasi untuk model yang baru, saya perlu membuat interface untuk masing-masing model, bahkan jika setup methodnya relatif sama. Hal ini akan membuat pekerjaan terasa lebih lama dan melelahkan. Selain itu, misal `CarController` tetap menjadi subclass `ProductController`, hal ini bisa mengurangi maintainability. Walaupun tidak ada method yang dioverride, akan tetapi kita bisa melakukan pemanggilan method yang sebenarnya hanya untuk model product melalui controller model car. Hal ini kurang diinginkan dan perlu dihindari. Sehingga, overall jika saya tidak menerapkan SOLID, code yang saya buat akan lebih susah dimaintain daripada code yang sekarang.
+
+</details>
