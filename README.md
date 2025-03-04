@@ -9,7 +9,7 @@
 
 
 <details>
-<summary><b>Assigment 1</b></summary>
+<summary><b>Assignment 1</b></summary>
 <br>
 
 # Reflection 1
@@ -79,6 +79,7 @@ Sejauh ini, saya rasa Tutorial 1 sudah cukup memberi pandangan yang luas bagaima
 **Solusinya,** dapat direfactor dengan membuat base test case, misalnya `BaseFunctionalTest.java` yang berisi instance variable dan setup procedure. Lalu, `CreateProductFunctionalTest`.java dapat meng-*inherit* base test tersebut dengan ditambah method tambahan sesuai dengan testing yang akan dilakukan. Sama halnya untuk class baru, bisa langsung meng-*inherit* base test dan kemudian ditambah dengan method untuk menghitung banyaknya row/produk yang telah dibuat.
 
 ---
+</details>
 
 <details>
 <summary><b>Assignment 2</b></summary>
