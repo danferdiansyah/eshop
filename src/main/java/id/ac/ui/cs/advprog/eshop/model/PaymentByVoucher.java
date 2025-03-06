@@ -15,6 +15,5 @@ public class PaymentByVoucher extends Payment{
 
     @Override
     public void setPaymentData(Map<String, String> paymentData) {
-
     }
 }
