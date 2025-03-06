@@ -147,3 +147,27 @@ Selain itu, prinsip SOLID juga saya terapkan di Controller, di mana saya memisah
 **3.** Andai saya tidak menerapkan SOLID, salah satu disadvantage yang cukup terasa adalah mengenai modul `service`. Jika saya membuat implementasi untuk model yang baru, saya perlu membuat interface untuk masing-masing model, bahkan jika setup methodnya relatif sama. Hal ini akan membuat pekerjaan terasa lebih lama dan melelahkan. Selain itu, misal `CarController` tetap menjadi subclass `ProductController`, hal ini bisa mengurangi maintainability. Walaupun tidak ada method yang dioverride, akan tetapi kita bisa melakukan pemanggilan method yang sebenarnya hanya untuk model product melalui controller model car. Hal ini kurang diinginkan dan perlu dihindari. Sehingga, overall jika saya tidak menerapkan SOLID, code yang saya buat akan lebih susah dimaintain daripada code yang sekarang.
 
 </details>
+
+<details>
+<summary><b>Assignment 4</b></summary>
+<br>
+
+# Reflection
+
+Setelah mengerjakan Tutorial Modul 4, saya rasa pendekatan TDD memberi cukup banyak *advantage* dalam proses development. Dengan membuat unit test terlebih dahulu untuk skenario positif dan negatif, kita menetapkan ekspektasi yang jelas terhadap logika program. Pendekatan ini membantu kita melakukan development aplikasi yang relatif *less buggy* karena setiap bagian kode sudah diuji sebelum diintegrasikan ke main project, sehingga bug dapat dideteksi lebih awal.
+
+Penerapan TDD yang "benar" juga seharusnya membuat proses development menjadi lebih efisien. Karena bug dapat dideteksi dan diperbaiki di awal, maka tim developer tidak perlu kehilangan banyak sekali waktu yang biasanya dipakai untuk proses debugging ketika proses development. Selain itu, jika menerapkan TDD dengan benar, Developer akan menghadapi bug yang relatif lebih sedikit setelah diluncurkan. Jika tidak menerapkan TDD, akan cukup banyak bug yang harus dicari atau bahkan ditemukan oleh pengguna setelah produk diluncurkan. Sehingga, TDD merupakan approach yang sangat baik untuk membantu proses development menjadi lebih efisien secara keseluruhan.
+
+Prinsip FIRST dalam pendekatan TDD juga diterapkan dengan baik
+
+- **Fast**: Testing berjalan dengan cepat karena penggunaan mock, instead operasi database asli yang cenderung memakan waktu.
+
+- **Independent**: Setiap metode pengujian dirancang secara independen, sehingga setiap tes fokus pada satu logika spesifik dengan data baru yang disiapkan di awal, menghindari dependency antartes.
+
+- **Repeatable**: Konsistensi hasil dijamin dengan penggunaan data testing yang tetap serta repository buatan untuk menghindari interaksi langsung dengan codebase aslinya.
+
+- **Self-validating**: Penilaian hasil tes menjadi mudah karena adanya *assertion* spesifik yang secara jelas menentukan apakah tes passed atau failed.
+
+Selain itu, meskipun cakupan pengujian sudah tinggi, masih ada ruang untuk perbaikan, misalnya dengan menambahkan pengujian parameterized dan memperluas cakupan *edge cases*. Pendekatan TDD tidak hanya membantu mendeteksi bug sedini mungkin, tetapi juga relatif meningkatkan kualitas kode dan mempercepat siklus development secara overall.
+
+</details>
