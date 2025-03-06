@@ -30,9 +30,9 @@ public class PaymentRepositoryTest {
         validBankData.put("bankName", "Bank Central Asia");
         validBankData.put("referenceCode", "bc50e0c2-84fc-41ba-836c-738cec99fade");
 
-        Payment payment1 = new Payment("0d658088-9d8e-43ba-995e-7fd8557b89c9", PaymentMethod.BY_VOUCHER.getValue(), PaymentStatus.SUCCESS.getValue(), validVoucherData);
-        Payment payment2 = new Payment("4ca686dd-56cd-44d3-a30b-950d66b7e71f", PaymentMethod.BY_VOUCHER.getValue(), PaymentStatus.REJECTED.getValue(), invalidVoucherData);
-        Payment payment3 = new Payment("e4884da6-b44c-414c-abf3-6d633efc4586", PaymentMethod.BY_TRANSFER.getValue(), PaymentStatus.SUCCESS.getValue(), validBankData);
+        Payment payment1 = new Payment("0d658088-9d8e-43ba-995e-7fd8557b89c9", PaymentMethod.VOUCHER.getValue(), PaymentStatus.SUCCESS.getValue(), validVoucherData);
+        Payment payment2 = new Payment("4ca686dd-56cd-44d3-a30b-950d66b7e71f", PaymentMethod.VOUCHER.getValue(), PaymentStatus.REJECTED.getValue(), invalidVoucherData);
+        Payment payment3 = new Payment("e4884da6-b44c-414c-abf3-6d633efc4586", PaymentMethod.BANK_TRANSFER.getValue(), PaymentStatus.SUCCESS.getValue(), validBankData);
         payments.add(payment1);
         payments.add(payment2);
         payments.add(payment3);
