@@ -53,7 +53,7 @@ public class PaymentRepositoryTest {
 
     @Test
     void testSaveFromEdit() {
-        Payment payment = payments.get(1);
+        Payment payment = payments.getFirst();
         paymentRepository.save(payment);
         Payment modifiedPayment = new Payment(payment.getId(), payment.getMethod(), PaymentStatus.SUCCESS.getValue(), payment.getPaymentData());
         Payment result = paymentRepository.save(modifiedPayment);
