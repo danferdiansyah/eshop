@@ -23,9 +23,9 @@ public class PaymentRepositoryTest {
         this.paymentRepository = new PaymentRepository();
         this.payments = new ArrayList<>();
         Map<String, String> validVoucherData = new HashMap<String,String>();
-        validVoucherData.put("voucherCode", "CODE2");
+        validVoucherData.put("voucherCode", "ESHOP");
         Map<String, String> invalidVoucherData = new HashMap<String,String>();
-        invalidVoucherData.put("voucherCode", "CODE1");
+        invalidVoucherData.put("voucherCode", "ADVPRO");
         Map<String, String> validBankData = new HashMap<String,String>();
         validBankData.put("bankName", "Bank Central Asia");
         validBankData.put("referenceCode", "bc50e0c2-84fc-41ba-836c-738cec99fade");
@@ -53,12 +53,12 @@ public class PaymentRepositoryTest {
 
     @Test
     void testSaveFromEdit() {
-        Payment payment = payments.getFirst();
+        Payment payment = payments.get(1);
         paymentRepository.save(payment);
         Payment modifiedPayment = new Payment(payment.getId(), payment.getMethod(), PaymentStatus.SUCCESS.getValue(), payment.getPaymentData());
         Payment result = paymentRepository.save(modifiedPayment);
 
-        Payment paymentResult = paymentRepository.findById(payments.getFirst().getId());
+        Payment paymentResult = paymentRepository.findById(payments.get(1).getId());
         assertEquals(payment.getId(), result.getId());
         assertEquals(payment.getId(), paymentResult.getId());
         assertEquals(payment.getMethod(), paymentResult.getMethod());
