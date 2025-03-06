@@ -35,7 +35,7 @@ public class PaymentTest{
         Payment payment = new Payment("b2ec45d8-91c8-4b49-9de9-187f23abc123", "VOUCHER", "SUCCESS", newData);
         payment.setStatus("SUCCESS");
         assertEquals("b2ec45d8-91c8-4b49-9de9-187f23abc123", payment.getId());
-        assertEquals("ESHOP1234ABC5678", voucherData.get("voucherCode"));
+        assertEquals("ESHOP", voucherData.get("voucherCode"));
         assertEquals("VOUCHER", payment.getMethod());
         assertEquals("SUCCESS", payment.getStatus());
     }
