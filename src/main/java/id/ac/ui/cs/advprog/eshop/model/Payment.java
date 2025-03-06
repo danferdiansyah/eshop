@@ -32,7 +32,7 @@ public class Payment {
     }
 
     public void setMethod(String method) {
-        String[] methodList = {"by-voucher", "by-transfer"};
+        String[] methodList = {"VOUCHER", "BANK_TRANSFER"};
         if (Arrays.stream(methodList).noneMatch(item -> (item.equals(method)))) {
             throw new IllegalArgumentException();
         }
